@@ -2,14 +2,14 @@ version: '2'
 volumes:
   mysql_data:
 services:
-  apache_sa:
+  apache:
     build: ./apache
     ports:
-      - 8000:80
+      - 8902:80
     volumes:
       - ./www:/var/www/html
     links:
-      - mysql_sa
+      - mysql
     restart: always
     ulimits:
       stack: -1
@@ -20,7 +20,7 @@ services:
       - SMTP_PASS=password
       - SMTP_REWRITE_DOMAIN=pdd-host.ru
       - SMTP_HOSTNAME=www.host.ru
-  mysql_sa:
+  mysql:
     build: ./mysql
     volumes:
       - mysql_data:/var/lib/mysql
